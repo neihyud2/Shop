@@ -1,0 +1,51 @@
+.modal-auth.hide
+  .modal-auth__overlay
+  .modal-auth__body
+    // Register form
+    form(method='post').auth-form.auth-form-register.hide
+      .auth-form__container
+        .auth-form__header
+          h3.auth-form__heading ĐĂNG KÝ
+          span.auth-form__switch-btn ĐĂNG NHẬP
+        .form_message
+        .auth-form__form
+          .auth-form__group
+            input#fullname.auth-form__input(type='text', name='username', placeholder='Tên người sử dụng')
+          .auth-form__group
+            input#account.auth-form__input(type='text', name='account', placeholder='Tên đăng nhập')
+          .auth-form__group
+            input#password.auth-form__input(type='password', name='password', placeholder='Mật khấu')
+          .auth-form__group
+            input#address.auth-form__input(type='text', name='address', placeholder='Địa chỉ')
+          .auth-form__group
+            input#phone.auth-form__input(type='text', name='phone', placeholder='SĐT')  
+          .auth-form__aside
+            p.auth-form__policy-text
+              |  Bằng việc đăng ký, bạn đã đồng ý với Shop về 
+              a.auth-form__text-link(href='') Điều khoản dịch vụ 
+              | &amp; 
+              a.auth-form__text-link(href='') Chính sách bảo mật
+          .auth-form__controls
+            button.btn.auth-form__controls-back(class='btn.btn--normal') TRỞ LẠI
+            button(formaction='/register').btn.btn--primary.btn--disabled ĐĂNG KÝ
+    // Login form
+    form(method='post').auth-form.auth-form-login.hide
+      .auth-form__container
+        .auth-form__header
+          h3.auth-form__heading ĐĂNG NHẬP
+          span.auth-form__switch-btn ĐĂNG KÝ
+        .auth-form__form
+          .auth-form__group
+            input.auth-form__input(type='text', name='account', placeholder='Tên đăng nhập')
+          .auth-form__group
+            input.auth-form__input(type='password', name='password', placeholder='Mật khấu')
+          .auth-form__aside
+            .auth-form__help
+              a.auth-form__help-link.auth-form__help-forgot(href='') Quên mật khẩu
+              span.auth-form__help-separate
+              a.auth-form__help-link(href='') Cần trợ giúp
+          .auth-form__controls
+            button.btn.auth-form__controls-back(class='btn.btn--normal') TRỞ LẠI
+            button(formaction='/login').btn.btn--primary.btn--disabled ĐĂNG NHẬP
+
+

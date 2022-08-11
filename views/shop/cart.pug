@@ -1,0 +1,108 @@
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title Shop
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css')
+  script(src='https://kit.fontawesome.com/c909c23c5d.js', crossorigin='anonymous')
+  link(rel='stylesheet', href='./styles/base.css')
+  link(rel='stylesheet', href='./styles/cart.css')
+  link(rel='stylesheet', href='./styles/layouts.css')
+  link(rel='stylesheet', href='./styles/modal.css')
+  link(rel='stylesheet', href='./styles/auth.css')
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap', rel='stylesheet')
+.app
+  header.header
+    .grid
+      nav.header__navbar
+        ul.header__navbar-list
+          a(href='/').header__navbar-item.header__navbar-item--has-qr.header__navbar-item--separate
+            | Vào cửa hàng
+            // Header QR Code
+            .header__qr
+              img.header__qr-img(src='./images/qr_code.png', alt='QR Code')
+              .header__qr-apps
+                a.header__qr-link(href='')
+                  img.header__qr-download-img(src='./images/google_play.png', alt='')
+                a.header__qr-link(href='')
+                  img.header__qr-download-img(src='./images/app_store.png', alt='')
+          li.header__navbar-item
+            span.header__navbar-title--no-pointer K&#x1EBF;t n&#x1ED1;i
+            a.header__navbar-icon-link(href='')
+              i.header__navbar-icon.fab.fa-facebook
+            a.header__navbar-icon-link(href='')
+              i.header__navbar-icon.fab.fa-instagram
+        ul.header__navbar-list
+          li.header__navbar-item.header__navbar-item--has-notify
+            a.header__navbar-item-link(href='')
+              i.header__navbar-icon.far.fa-bell
+              | Thông báo
+            .header__notify
+              header.header__notify-header
+                h3 Thông báo mới nhận
+              footer.header__notify-footer
+                a.header__notify-footer-btn(href='') Xem tất cả
+          li.header__navbar-item
+            a.header__navbar-item-link(href='')
+              i.header__navbar-icon.fas.fa-question-circle
+              | Trợ giúp
+          if (!userId)
+            li.header__navbar-item.header__navbar-item--strong.header__navbar-item--separate.header__navbar-item--register Đăng ký
+            li.header__navbar-item.header__navbar-item--strong.header__navbar-item--login Đăng nhập
+          else 
+            li.header__navbar-item.header__navbar-user
+              img.header__navbar-user-img(src='./images/n-min.png', alt='')
+              span.header__navbar-user-name #{userName}
+              ul.header__navbar-user-menu
+                li.header__navbar-user-item
+                  a(href='') Tài khoản của tôi
+                li.header__navbar-user-item
+                  a(href='') Địa chỉ của tôi
+                li.header__navbar-user-item
+                  a(href='') Đơn mua
+                li.header__navbar-user-item.header__navbar-user-item--separate
+                  a(href='cart/logout') Đăng xuất
+      // Header with Search
+  .app_container
+    .grid
+      .header-with-search
+        .header__logo#logo
+          i.fa-solid.fa-cart-shopping.icon-shopping
+          | Giỏ Hàng
+      .home-product
+        form(id='home-product-cart' method='post')
+          each product in products
+            .home-product-item(product-id=`${product.productCode}`)
+              img.home-product-item__img(src=`${product.productImage}`, alt='')
+              h4.home-product-item__name #{product.productName}
+              .home-product-item__price
+                span.home-product-item__price-old #{product.buyPriceOld}&dstrok;
+                span.home-product-item__price-current #{product.buyPriceNew}&dstrok;
+              input.home-product-item__quantity(type='number', name=`${product.productCode}`, min='1', max='50', value='1', onchange=`handleUpdatePrice(${product.productCode})`)
+              span.home-product-item__total #{product.buyPriceNew}&dstrok;
+              a(href=`/cart/delete/${product.productCode}`).home-product-item__remove Xóa
+      .home-product-totals
+        span.home-product-totals__price 0
+        if (userId)
+          button#payment.btn.btn--primary.have-user Thanh toán
+        else 
+          button#payment.btn.btn--primary.no-have-user Thanh toán  
+  //- +auth('/editor/register', '/editor/login')
+  include ./auth/login      
+  include ./layouts/footer
+a(href='#payment').move-to-payment
+  i.fa-solid.fa-angle-down
+.modal.hide
+  .modal__inner
+    .modal__header
+      p Welcome to Shop
+      i.fas.fa-times
+    .modal__body
+      h2 Success
+      p Bạn đã mua hàng thành công
+    .modal__footer
+      button(form='home-product-cart', formaction='/success').btn-success OK 
+form#path
+script(src="/script/modals/modal.js")
+script(src="/script/cart.js")
+script(src="/script/modals/modal.auth.js")

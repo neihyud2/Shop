@@ -1,0 +1,67 @@
+create database my_db;
+
+use my_db;
+
+CREATE TABLE `customers` (
+  `customerId` varchar(255) NOT NULL, 
+  `customerName` varchar(50) NOT NULL,
+  `customerUsername` varchar(50) NOT NULL,
+  `customerPassword` varchar(50) NOT NULL,
+  `customerPhone` varchar(10) NOT NULL,
+  `customerAddress` varchar(50) NOT NULL,
+  PRIMARY KEY (`customerId`)
+);
+
+CREATE TABLE `orders` 
+  `productCode` varchar(45) NOT NULL,
+  `orderDate` varchar(255) NOT NULL CURRENT_TIMESTAMP DEFAULT_GENERATED on update CURRENT_TIMESTAMP,
+  `quantityOrdered` varchar(45) NOT NULL,
+  `customerId` varchar(255) NOT NULL,
+  `priceEach` varchar(255) NOT NULL,
+  PRIMARY KEY (`orderNumber`),
+  KEY `customerId` (`customerId`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customers` (`customerId`)
+);
+
+CREATE TABLE `products` (
+  `productCode` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `productName` varchar(1000) NOT NULL,
+  `productLine` varchar(50) NOT NULL,
+  `quantityInStock` smallint(6) NOT NULL,
+  `buyPriceOld` decimal(10,2) NOT NULL,
+  `buyPriceNew` decimal(10,2) NOT NULL,
+  `productImage` varchar(255) NOT NULL,
+  `isSold` varchar(10) NOT NULL 
+);
+
+
+insert into products (productLine, productName, productImage, quantityInStock, buyPriceOld, buyPriceNew) values  
+('A', 'Áo croptop Polo nữ tay ngắn MADELA , Croptop nữ dáng ôm cổ đức, Áo Thun Polo nữ croptop ngắn tay', './images/Female/pic1.jpg', 80, 120000, 80000),
+('A', 'Áo sơ mi nữ trắng đi học tay dài bo nhúm cổ bẻ basic form rộng vừa - Sơ mi đi học sinh nữ trắng tay dài', './images/Female/pic2.jpg', 80, 150000, 100000),
+('A', 'Áo Croptop YAN Tay Dài Nữ, áo thun croptop nữ trẻ trung năng động', './images/Female/pic3.jpg', 80, 1500000, 1000000),
+('A', 'Áo Croptop Nữ Tay Dài dáng ôm body khóa cúc , Croptop Nữ tay dài, áo thun croptop nữ trẻ trung năng động', './images/Female/pic4.jpg', 80, 160000, 145000),
+('A', 'Áo sơ mi nữ form rộng dài tay kiểu công sở đẹp', './images/Female/pic5.jpg', 80, 150000, 100000),
+('A', 'Áo SOMI Trắng /Đen TRƠN, Áo Thun Polo nữ croptop ngắn tay', './images/Female/pic6.jpg', 80, 150000, 100000),
+('A', 'Áo sơ mi Cổ Bèo Tay Phồng Tiểu Thư Tay Bo , Áo Thun Polo nữ croptop ngắn tay', './images/Female/pic7.jpg', 80, 150000, 100000),
+('A', 'Áo sơ mi nữ cổ đức dài tay công sở Tiinstore giấu khuy áo chất cát hàn chống nhăn phong cách Hàn Quốc', './images/Female/pic8.jpg', 80, 145000, 102000),
+('A', 'Áo Sơ Mi Nữ Trắng Tay Bồng Thời Trang, Áo Sơ Mi Nữ Trắng Tay Bồng Thời Trang', './images/Female/pic9.jpg', 80, 135000, 90000),
+('A', 'Áo sơ mi kiểu nữ, Áo sơ mi cổ bèo phối ren bên tiểu thư xinh xắn', './images/Female/pic10.jpg', 80, 125000, 90000),
+
+('B', 'Quần tây nam MMANS chất vải tuyết mưa ống côn co giãn dáng ôm body', './images/Male/pic8.jpg', 80, 120000, 80000),
+('B', 'Áo thun nam cổ tròn in HappyHow vải Cotton co giãn, dày dặnt', './images/Male/pic1.jpg', 80, 120000, 80000),
+('B', 'Áo thun Unisex N7 Basic Tee phông trơn nam nữ tay lỡ oversize form rộng 12 màu', './images/Male/pic7.jpg', 80, 120000, 80000),
+('B', 'Áo thun UNDER Hà Nội 36 Phố Phường', './images/Male/pic2.jpg', 80, 120000, 80000),
+('B', 'Áo Phông Nam Ngắn Tay 4 Màu Thời Trang Cao Cấp AVIANO', './images/Male/pic3.jpg', 80, 120000, 80000),
+('B', 'Áo Thun Nam Kiểu Dáng Polo Ngắn Tay Phối Màu Kẻ Ngang Thời Trang AVIANO', './images/Male/pic4.jpg', 80, 120000, 80000),
+('B', 'Quần jean nam baggy ống suông rộng phong cách hàn quốc hot 2021 vanicamen', './images/Male/pic6.jpg', 80, 120000, 80000),
+('B', 'Áo thun nam in đẹp nam, Thời trang Nam LETASTORE - TC88', './images/Male/pic5.jpg', 80, 120000, 80000),
+
+('C', 'Dép cho bé Cheerful Mario, sục cross cho bé trai bé gái siêu nhẹ chống trơn trượt chính hãng', './images/Child/pic3.jpg', 80, 1500000, 1000000),
+('C', 'Áo sơ mi ngắn tay đi biển tơ đũi bé trai Magickids Đồ đi biển cho bé mềm mại, Quần áo trẻ em', './images/Child/pic1.jpg', 80, 1500000, 1000000),
+('C', 'Áo ba lỗ bé trai áo sát nách cho bé in hình ngộ nghĩnh chất cotton hàng xuất Âu Mỹ', './images/Child/pic2.jpg', 80, 1500000, 1000000),
+('C', 'Giày tập đi cho bé mềm mại chống trơn trượt dễ thương cho bé, Giày tập đi cho bé trai bé gái', './images/Child/pic4.jpg', 80, 1500000, 1000000),
+('C', 'Kẹp tóc đính kim sa lấp láp phong cách Hàn Quốc - kẹp tóc cho bé- Selenshop', './images/Child/pic5.jpg', 80, 1500000, 1000000),
+('C', 'Quần đùi bé trai và quần đùi bé gái 5 đến 16kg QATE66 - quần chục bé trai và quần chục bé gái từ sơ sinh đến 16kg', './images/Child/pic6.jpg', 80, 1500000, 1000000),
+('C', 'Áo phông bé trai hãng, Áo trẻ em Kunkids', './images/Child/pic7.jpg', 80, 1500000, 1000000),
+('C', 'Bộ đồ pyjama rời dài tay họa tiết dễ thương cho bé BR20017  MAGICKIDS Quần áo trẻ em', './images/Child/pic8.jpg', 80, 1500000, 1000000)
+
